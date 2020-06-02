@@ -121,6 +121,10 @@
         _interval = undefined;
       }
     });
+    // Register a start polling event on the container
+    container.addEventListener("async-start", function(event){
+      _renderAsyncFunction();
+    });
 
     <% if turbolinks %>
     document.addEventListener("turbolinks:visit", function(e) {
