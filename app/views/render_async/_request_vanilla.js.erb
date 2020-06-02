@@ -156,8 +156,7 @@
     }
   }
 
-  // DVB _runAfterDocumentLoaded(_setUpToggle);
-  _setUpToggle();
+  _runAfterDocumentLoaded(_setUpToggle);
   <% elsif !toggle %>
   _runAfterDocumentLoaded(_renderAsyncFunction);
   <% end %>
