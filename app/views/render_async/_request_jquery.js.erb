@@ -138,7 +138,8 @@ if (window.jQuery) {
       });
     }
 
-    _runAfterDocumentLoaded(_setUpToggle);
+    // DVB need more testing to accept this... revert 2.1.5, _runAfterDocumentLoaded(_setUpToggle);
+    _setupToggle();
     <% elsif !toggle %>
     _runAfterDocumentLoaded(_renderAsyncFunction)
     <% end %>
