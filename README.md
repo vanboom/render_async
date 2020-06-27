@@ -112,6 +112,15 @@ Rendered code in the view:
 ...
 ```
 
+### Persisting the container
+
+Set  the `keep_container` option to retain the container in the view and render the async content inside of it.
+```erb
+<%= render_async users_path, container_id: 'users-container', keep_container: true %>
+```
+
+The async content will be rendered inside of the container.
+
 ### Passing in a container class name
 
 `render_async` renders an element that gets replaced with the content of your
@@ -294,6 +303,16 @@ it will show an [error message](#handling-errors) which you need to specify.
 This can show useful when you know your requests often fail, and you don't want
 to refresh the whole page just to retry them.
 
+### Manual Retry
+
+When the `container_id` and `keep_container` options are used to persist the
+container ID, you may trigger a manual retry by setting the `async-retry` event
+on the container.
+
+```javascript
+$("#users-container").trigger('async-retry');
+```
+
 ### Toggle event
 
 You can trigger `render_async` loading by clicking or doing another event to a
@@ -342,7 +361,7 @@ You are telling `render_async` to fetch comments_path every 5 seconds.
 
 This can be handy if you want to enable polling for a specific URL.
 
-Polling may be stopped by sending the `async-stop` event to the container element. 
+Polling may be stopped by sending the `async-stop` event to the container element.
 Polling may be started by sending the `async-start` event to the container element.
 
 NOTE: By passing interval to `render_async`, initial container element
