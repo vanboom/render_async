@@ -50,7 +50,7 @@
       if (request.readyState === 4) {
         if (request.status >= SUCCESS && request.status < ERROR) {
           var container = document.getElementById('<%= container_id %>');
-          <% if interval %>
+          <% if interval or keep_container %>
           container.innerHTML = request.response;
           <% else %>
           container.outerHTML = request.response;
@@ -107,6 +107,8 @@
   var _renderAsyncFunction = _makeRequest;
 
   var _interval;
+  var container = document.getElementById('<%= container_id %>');
+
   <% if interval %>
     var _renderAsyncFunction = function() {
       _makeRequest();
@@ -114,7 +116,6 @@
     }
 
     // Register a polling stop event on the container
-    var container = document.getElementById('<%= container_id %>');
     container.addEventListener("async-stop", function(event){
       if (typeof(_interval) === 'number'){
         clearInterval(_interval)
@@ -136,6 +137,9 @@
     <% end %>
   <% end %>
 
+  container.addEventListener("async-retry", function(event){
+    _renderAsyncFunction();
+  });
   <% if toggle %>
   function _setUpToggle() {
     var selectors = document.querySelectorAll('<%= toggle[:selector] %>');

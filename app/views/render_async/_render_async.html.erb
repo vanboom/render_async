@@ -8,6 +8,7 @@
 <% content_for content_for_name do %>
   <%= javascript_tag html_options do %>
     <% locals = { container_id: container_id,
+                  keep_container: keep_container,
                   path: path,
                   method: method,
                   data: data,

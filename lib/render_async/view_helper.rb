@@ -40,7 +40,8 @@ module RenderAsync
     def container_element_options(options)
       { html_element_name: options[:html_element_name] || 'div',
         container_id: options[:container_id] || generate_container_id,
-        container_class: options[:container_class] }
+        container_class: options[:container_class],
+        keep_container: options[:keep_container].present? }
     end
 
     def request_options(options)
